@@ -19,12 +19,14 @@ function onFormInput(evt) {
 function populateTextarea() {
     const savedMessage = JSON.parse(localStorage.getItem(formKey));
 
-    if (savedMessage === null) {
-        return;
+    if (savedMessage) {
+        formMessage.value = savedMessage['message'];
+        formEmail.value = savedMessage['email'];
+    } else {
+        formMessage.value = '';
+        formEmail.value = '';
     };
     
-    formMessage.value = savedMessage['message'] || '';
-    formEmail.value = savedMessage['email'] || '';
 };
 
 form.addEventListener('submit', removeDate);
@@ -33,4 +35,10 @@ function removeDate(evt) {
     evt.currentTarget.reset();
     const objData = JSON.parse(localStorage.getItem(formKey));
     localStorage.removeItem(formKey);
-}
+    console.log(formData);
+    formData.email = '';
+    formData.message = '';
+}   
+
+
+
